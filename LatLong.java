@@ -1,3 +1,5 @@
+package com.blueapps.LatLong
+
 import android.location.Location;
 
 public class LatLong {
