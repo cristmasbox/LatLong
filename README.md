@@ -6,7 +6,9 @@ A simple Java datatype to store the Latitude and the Longitude. Distance calcula
 ### Formular
 The formular for the calculation of the distance is from https://www.calculator.net/distance-calculator.html.
 
-For this project I used the _Lambert's formula_ for distance calculations on an earth elipsoid.
+> [!NOTE]
+> For this project I used the _Lambert's formula_ for distance calculations on an earth elipsoid.
+
 This is the formula:<br>
 <img src="https://d26tpo4cm8sb6k.cloudfront.net/img/distance/lambert-formula.png"/><br><br>
 In code:
@@ -20,14 +22,15 @@ double d = a * (o - (f / 2) * (X + Y));
 * `X` and `Y`is calculated later.<br><br>
 
 So to calculate the distance we have to get `a`, `o`, `f`, `X` and `Y`.
-
 <br><br>
 
 First we have to get `a`, the equatorial radius. You can get it by calling my class:
 ```
 double a = LatLong.radiusEquatorial;
 ```
-Or you can go to https://www.heret.de/mathe/erde.shtml and copy the "Äquatorradius", which is `6378137`m.
+
+> [!TIP]
+> Alternatively you can go to https://www.heret.de/mathe/erde.shtml and copy the "Äquatorradius", which is `6378137`m.
 
 <br><br>
 
@@ -44,13 +47,14 @@ In code it looks like that:
 double deltaLongitude = Math.abs(longitudeA - longitudeB);
 double o = Math.acos(Math.sin(latitudeA) * Math.sin(latitudeB) + Math.cos(latitudeA) * Math.cos(latitudeB) * Math.cos(deltaLongitude));
 ```
-Don't forget to convert the latitude and longitude values from _degree_ to _radiand_, because the `Math.acos()`, `Math.sin()`and `Math.cos()` need or return angles in radiands.
-```
-latitudeA = Math.toRadians(latitudeA);
-latitudeB = Math.toRadians(latitudeB);
-longitudeA = Math.toRadians(longitudeA);
-longitudeB = Math.toRadians(longitudeB);
-```
+> [!CAUTION]
+> Don't forget to convert the latitude and longitude values from _degree_ to _radiand_, because the `Math.acos()`, `Math.sin()`and `Math.cos()` need or return angles in radiands.
+> ```
+> latitudeA = Math.toRadians(latitudeA);
+> latitudeB = Math.toRadians(latitudeB);
+> longitudeA = Math.toRadians(longitudeA);
+> longitudeB = Math.toRadians(longitudeB);
+> ```
 <br><br>
 
 Now we calculate `f`. `f`is the _flattening_ of the earth and is calculated like that:<br>
@@ -68,7 +72,10 @@ f = (a - b) / a;
 After that we can calculate `X` and `Y`. The calculation of that is a little bit complex and we need some other values.
 The formulas are:<br><br>
 <img src="https://d26tpo4cm8sb6k.cloudfront.net/img/distance/x-y-value.png"/><br><br>
-For those who don't know, __sin^2()__ and __cos^2()__ is a short writing for __(sin())^2__ and __(cos())^2__.
+
+> [!NOTE]
+> For those who don't know, __sin²()__ and __cos²()__ is a short writing for __(sin())²__ and __(cos())²__.<br>
+
 In Code it looks like that:
 ```
 double X = (o - Math.sin(o)) * ((Math.pow(Math.sin(P), 2) * Math.pow(Math.cos(Q), 2)) / (Math.pow(Math.cos(o / 2), 2)));
@@ -78,7 +85,7 @@ double Y = (o + Math.sin(o)) * ((Math.pow(Math.cos(P), 2) * Math.pow(Math.sin(Q)
 * `o` is the variable we calculated earlier  __unit: radiand__ <br>
 * `P` and `Q` are Variables which have to be calculated.
 
-So for using the formula we have to calculate `P` and `Q`. Here is the formula:<br><br>
+So for using the formula we have to calculate `P` and `Q`. Here is the formula for that:<br><br>
 P = (β1 + β2)/2<br>and<br>Q = (β2 - β1)/2<br><br>
 
 Now we have to calculate β1 and β2. And as you may already know, there is a formular for this:<br><br>
@@ -100,7 +107,8 @@ double X = (o - Math.sin(o)) * ((Math.pow(Math.sin(P), 2) * Math.pow(Math.cos(Q)
 double Y = (o + Math.sin(o)) * ((Math.pow(Math.cos(P), 2) * Math.pow(Math.sin(Q), 2)) / (Math.pow(Math.sin(o / 2), 2)));
 ```
 
-You can test the code with the [Distance Calculator](https://www.calculator.net/distance-calculator.html) (It uses the same Code).
+> [!TIP]
+> You can test the code with the [Distance Calculator](https://www.calculator.net/distance-calculator.html) (It uses the same Code).
 
 ### Usage of the distance calculation
 There are different ways to use the distance calculation with the LatLong class integrated in your project:
