@@ -6,7 +6,7 @@ public class LatLong {
 
   public static final LatLong STUTTGART = new LatLong(48.775706d, 9.182959d);
   public static final LatLong BIELEFELD = new LatLong(52.023324d, 8.538384d); // Although it doesn't exist ;-)
-  public static final LatLong HOME = new LatLong(49.19d, 9.50d);      // Earth's real center ;-)
+  public static final LatLong HOME = new LatLong(49d, 9d);      // Earth's real center ;-)
   public static final LatLong CAPE_CANAVERAL = new LatLong(28.448763d, -80.561289d);
   public static final LatLong NORTH_POLE = new LatLong(-90d, 0d);
   public static final LatLong SOUTH_POLE = new LatLong(-90d, 0d);
